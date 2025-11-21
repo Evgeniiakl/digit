@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Test: Adjektivdeklination</title>
+    <style>
+        /* Базовые стили и сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративные элементы */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        }
+
+        .decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b20, #4ecdc420);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .decoration-2 {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #45b7d120, #96ceb420);
+            border-radius: 50%;
+            bottom: -75px;
+            left: -75px;
+            z-index: 0;
+        }
+
+        /* Заголовки */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            color: #34495e;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Информация о тесте */
+        .test-info {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4ecdc4;
+            position: relative;
+            z-index: 1;
+        }
+
+        .test-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .test-info h3::before {
+            content: '💡';
+            font-size: 1.2em;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+        }
+
+        .info-item::before {
+            content: '✓';
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        /* Вопросы */
+        .question {
+            background: white;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question:hover {
+            border-color: #4ecdc4;
+            transform: translateY(-2px);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .question p {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* Варианты ответов */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option-label:hover {
+            background: #e9ecef;
+            border-color: #4ecdc4;
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .option-label input[type="radio"]:checked + span {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        /* Кнопка */
+        .button-container {
+            position: relative;
+            z-index: 1;
+            margin-top: 30px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Результат */
+        #result {
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .correct {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 2px solid #b1dfbb;
+        }
+
+        .incorrect {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border: 2px solid #f1b0b7;
+        }
+
+        .result-score {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .result-message {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .result-details {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* Прогресс-бар */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .question {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .question p {
+                font-size: 1em;
+            }
+        }
+
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Иконки */
+        .icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Декоративные элементы -->
+        <div class="decoration"></div>
+        <div class="decoration-2"></div>
+
+        <!-- Заголовок -->
+        <h1>🎯 Deutsch Test</h1>
+        <h2>Adjektivdeklination - Meistern Sie die deutsche Grammatik!</h2>
+
+        <!-- Прогресс-бар -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Информация о тесте -->
+        <div class="test-info">
+            <h3>Informationen zum Test</h3>
+            <p>Testen Sie Ihr Wissen über die Adjektivdeklination im Deutschen. Wählen Sie die richtige Endung für jedes Adjektiv.</p>
+            <div class="info-grid">
+                <div class="info-item">5 Fragen</div>
+                <div class="info-item">Multiple Choice</div>
+                <div class="info-item">Sofortige Auswertung</div>
+                <div class="info-item">Mit Erklärungen</div>
+            </div>
+        </div>
+
+        <!-- Форма теста -->
+        <form id="quizForm">
+            <!-- Вопрос 1 -->
+            <div class="question">
+                <p><span class="question-number">1</span>Das ist ein___ <strong>alt___</strong> Mann. (alt)</p>
+                <div class="options">
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="er">
+                        <span>-er</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="en">
+                        <span>-en</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="es">
+                        <span>-es</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="e">
+                        <span>-e</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="question">
+                <p><span class="question-number">2</span>Ich kaufe eine <strong>rot___</strong> Bluse. (rot)</p>
+                <div class="options">
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="e">
+                        <span>-e</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="en">
+                        <span>-en</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="er">
+                        <span>-er</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="es">
+                        <span>-es</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="question">
+                <p><span class="question-number">3</span>Sie hilft dem <strong>klein___</strong> Kind. (klein)</p>
+                <div class="options">
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="er">
+                        <span>-er</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="e">
+                        <span>-e</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="es">
+                        <span>-es</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="en">
+                        <span>-en</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="question">
+                <p><span class="question-number">4</span>Hier stehen <strong>neu___</strong> Häuser. (neu)</p>
+                <div class="options">
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="en">
+                        <span>-en</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="er">
+                        <span>-er</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="e">
+                        <span>-e</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="es">
+                        <span>-es</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="question">
+                <p><span class="question-number">5</span>Er hat einen <strong>teur___</strong> Wagen gekauft. (teuer)</p>
+                <div class="options">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="e">
+                        <span>-e</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="er">
+                        <span>-er</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="en">
+                        <span>-en</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="es">
+                        <span>-es</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <div class="button-container">
+                <button type="button" onclick="checkAnswers()" class="pulse">
+                    📊 Ergebnisse überprüfen
+                </button>
+            </div>
+        </form>
+
+        <!-- Блок результатов -->
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Правильные ответы
+            const correctAnswers = {
+                q1: "er", // ein alter Mann (Nom, Mask, unbest. Artikel)
+                q2: "e",  // eine rote Bluse (Akk, Fem, unbest. Artikel)
+                q3: "en", // dem kleinen Kind (Dat, Neut, best. Artikel)
+                q4: "e",  // neue Häuser (Nom, Pl, Nullartikel)
+                q5: "en"  // einen teuren Wagen (Akk, Mask, unbest. Artikel)
+            };
+
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const resultDiv = document.getElementById('result');
+
+            // Проверяем каждый вопрос
+            for (const question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[question]) {
+                    score++;
+                }
+            }
+
+            // Обновляем прогресс-бар
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = '100%';
+
+            // Показываем результат
+            resultDiv.style.display = 'block';
+            
+            const percentage = (score / totalQuestions) * 100;
+            let message = '';
+            let emoji = '';
+
+            if (percentage === 100) {
+                message = "Ausgezeichnet! Perfektes Ergebnis! 🎉";
+                emoji = "🏆";
+                resultDiv.className = 'correct';
+            } else if (percentage >= 70) {
+                message = "Gut gemacht! Fast perfekt! 👍";
+                emoji = "⭐";
+                resultDiv.className = 'correct';
+            } else if (percentage >= 50) {
+                message = "Nicht schlecht! Üben Sie weiter! 💪";
+                emoji = "📚";
+                resultDiv.className = 'correct';
+            } else {
+                message = "Üben Sie weiter! Sie schaffen das! 🌟";
+                emoji = "✨";
+                resultDiv.className = 'incorrect';
+            }
+
+            resultDiv.innerHTML = `
+                <div class="result-score">${score}/${totalQuestions}</div>
+                <div class="result-message">${emoji} ${message}</div>
+                <div class="result-details">
+                    <strong>Erklärungen:</strong><br>
+                    1. ein alter Mann (Nominativ, maskulin)<br>
+                    2. eine rote Bluse (Akkusativ, feminin)<br>
+                    3. dem kleinen Kind (Dativ, neutral)<br>
+                    4. neue Häuser (Nominativ, Plural, Nullartikel)<br>
+                    5. einen teuren Wagen (Akkusativ, maskulin)
+                </div>
+            `;
+
+            // Прокрутка к результатам
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Обновление прогресс-бара при выборе ответов
+        document.addEventListener('change', function() {
+            const totalQuestions = 5;
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        });
+    </script>
+</body>
+</html>
